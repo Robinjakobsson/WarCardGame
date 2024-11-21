@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">WarCardGame</string>
     <string name="let_s_play">Let\'s play!</string>
+    <string name="draw">Draw</string>
+    <string name="p1">P1:</string>
+    <string name="p2">P2:</string>
 </resources>

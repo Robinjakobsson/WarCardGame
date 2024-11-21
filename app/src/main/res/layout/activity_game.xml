@@ -8,56 +8,50 @@
     android:layout_height="match_parent"
     tools:context=".SetupActivity">
 
-    <FrameLayout
-        android:id="@+id/card_container"
+    <LinearLayout
+        android:id="@+id/left"
         android:layout_width="0dp"
         android:layout_height="260dp"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/cardcontainerTwo"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/right">
 
-
-        <ImageView
-            android:id="@+id/card_back"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/card_backside"
-            android:visibility="visible" />
+            app:cardCornerRadius="16dp">
+            <ImageView
+                android:id="@+id/playerOneImgView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/card_backside" />
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
 
-        <ImageView
-            android:id="@+id/card_front"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/hjarter_atta"
-            android:visibility="gone" />
-    </FrameLayout>
-
-
-    <FrameLayout
-        android:id="@+id/cardcontainerTwo"
+    <LinearLayout
+        android:id="@+id/right"
         android:layout_width="0dp"
         android:layout_height="260dp"
-        app:layout_constraintLeft_toRightOf="@id/card_container"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/left"
         app:layout_constraintTop_toTopOf="parent">
 
-
-        <ImageView
-            android:id="@+id/cardbackTwo"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/card_backside"
-            android:visibility="visible" />
-
-
-        <ImageView
-            android:id="@+id/cardfrontTwo"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/hjarter_drottning"
-            android:visibility="gone" />
-    </FrameLayout>
+            app:cardCornerRadius="16dp">
+            <ImageView
+                android:id="@+id/playerTwoImgView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/card_backside" />
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
 
     <LinearLayout
@@ -68,7 +62,7 @@
         android:orientation="vertical"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card_container" />
+        app:layout_constraintTop_toBottomOf="@id/right" />
 
 
     <LinearLayout
@@ -90,16 +84,16 @@
             android:textStyle="italic"
             android:textAlignment="center"
             android:gravity="center"
+            android:text="@string/p1"
             style="@style/CustomButtonStyle"
-            tools:text="P1:13"
             android:layout_weight="1" />
 
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/login_button"
+            android:id="@+id/drawButton"
             android:layout_width="wrap_content"
             android:layout_height="75dp"
-            android:text="Draw"
+            android:text="@string/draw"
             android:layout_gravity="center"
             android:layout_margin="20dp"
             android:backgroundTint="@color/Red"
@@ -118,7 +112,7 @@
             style="@style/CustomButtonStyle"
             android:gravity="center"
             android:textStyle="italic"
-            tools:text="P2:20"
+            android:text="@string/p2"
             android:layout_weight="1" />
     </LinearLayout>
 
