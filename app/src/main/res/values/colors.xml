@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="Red">#B22222</color>
     <color name="cardview_dark_background">#121212</color>
+    <color name="otherBlack">#2C2C2C</color>
 </resources>

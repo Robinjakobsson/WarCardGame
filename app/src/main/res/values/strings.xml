@@ -4,4 +4,10 @@
     <string name="draw">Draw</string>
     <string name="p1">P1:</string>
     <string name="p2">P2:</string>
+    <string name="prev_round">PREV ROUND</string>
+    <string name="previous_round">previous_round</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="previous_rounds">Previous Rounds</string>
+    <string name="war">WAR!</string>
 </resources>

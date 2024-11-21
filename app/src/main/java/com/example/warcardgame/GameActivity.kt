@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -12,11 +13,16 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.warcardgame.databinding.ActivityGameBinding
 import kotlin.random.Random
 
+/**
+ * Class where the Game happens
+ */
 class GameActivity : AppCompatActivity() {
     private lateinit var binding : ActivityGameBinding
     private lateinit var deck: Deck
     private lateinit var player : Player
     private lateinit var cpu : Player
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -27,15 +33,20 @@ class GameActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         player = Player(0)
         cpu = Player(0)
         deck = Deck()
+
 
         binding.drawButton.setOnClickListener {
             drawCard()
         }
     }
 
+    /**
+     * Method to Draw a card and play a round
+     */
     private fun drawCard() {
         if (deck.deck.size >= 2) {
 
@@ -52,25 +63,40 @@ class GameActivity : AppCompatActivity() {
             if (playerOneIndex > playerTwoIndex) {
                 deck.deck.removeAt(playerOneIndex)
                 deck.deck.removeAt(playerTwoIndex)
+
             } else {
                 deck.deck.removeAt(playerTwoIndex)
                 deck.deck.removeAt(playerOneIndex)
             }
 
-            if (playerOneCard.value > playerTwoCard.value) {
+            if (playerOneCard.value == playerTwoCard.value) {
+                warFunction(playerOneCard,playerTwoCard)
+
+            }else if (playerOneCard.value > playerTwoCard.value) {
                 player.points += 1
                 println("Player wins the round! Player points: ${player.points}")
-
-            } else if (playerTwoCard.value > playerOneCard.value) {
-                cpu.points += 1
-                println("CPU wins the round! CPU points: ${cpu.points}")
-
-            } else {
-                println("It's a tie!")
             }
+
+            else {
+                cpu.points += 1
+                println("Cpu wins the round! Cpu points: ${cpu.points}")
+                }
 
             binding.player1TextView.text = player.points.toString()
             binding.player2TextView.text = cpu.points.toString()
+
         }
+    }
+
+    private fun warFunction (playerOneCard : Card, playerTwoCard : Card) {
+        binding.warTextView.visibility = View.VISIBLE
+
+        val anim = ObjectAnimator.ofFloat(binding.playerOneImgView, "rotationY", 0f, 360f)
+        anim.duration = 500
+        anim.start()
+
+        val anim2 = ObjectAnimator.ofFloat(binding.playerTwoImgView, "rotationY", 0f, 360f)
+        anim2.duration = 500
+        anim2.start()
     }
 }

@@ -6,6 +6,7 @@ class Deck {
     private val values = 2..14
     var deck: MutableList<Card> = mutableListOf()
 
+
     init {
         generateDeck()
     }
@@ -15,6 +16,7 @@ class Deck {
             for(value in values) {
                 val imageResourceId = getImageResourceID(suit,value)
                 deck.add(Card(suit,value,imageResourceId))
+
             }
         }
         deck.shuffle()

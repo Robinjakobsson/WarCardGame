@@ -20,7 +20,4 @@
         app:rippleColor="@color/cardview_dark_background"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

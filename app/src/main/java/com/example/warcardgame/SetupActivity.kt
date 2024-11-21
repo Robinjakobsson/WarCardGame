@@ -10,14 +10,16 @@ import com.example.warcardgame.databinding.ActivitySetupBinding
 
 
 /*TODO
-        SetupActivity : Knapp : Let's play!
-        GameActivity : CardView,DrawButton,PoängSystem, Previous Round highlights
+        SetupActivity : Welcome text
+        GameActivity :  Previous Round highlights
         WarActivity? WarFragment? kom på vad som händer om man får lika.
         ResultActivity : Presentera resultat
         Klämma in sharedPrefs? gson?
 
  */
-
+/**
+ * Method to Welcome the user
+ */
 class SetupActivity : AppCompatActivity() {
     private lateinit var binding : ActivitySetupBinding
     override fun onCreate(savedInstanceState: Bundle?) {
