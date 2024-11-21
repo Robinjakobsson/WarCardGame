@@ -1,21 +1,30 @@
 package com.example.warcardgame
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.warcardgame.databinding.ActivityMainBinding
-import kotlin.random.Random
+import com.example.warcardgame.databinding.ActivitySetupBinding
+
+
+/*TODO
+        SetupActivity : Knapp : Let's play!
+        GameActivity : CardView,DrawButton,PoängSystem, Previous Round highlights
+        WarActivity? WarFragment? kom på vad som händer om man får lika.
+        ResultActivity : Presentera resultat
+        Klämma in sharedPrefs? gson?
+
+ */
 
 class SetupActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityMainBinding
-    val Deck = Deck()
+    private lateinit var binding : ActivitySetupBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivitySetupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -24,26 +33,9 @@ class SetupActivity : AppCompatActivity() {
             insets
         }
 
-
-        binding.drawButton.setOnClickListener {
-            drawCards()
+        binding.playButton.setOnClickListener {
+            val newIntent = Intent(this,GameActivity::class.java)
+            startActivity(newIntent)
         }
-    }
-    fun drawCards(){
-        val playerOneIndex = Random.nextInt(Deck.deck.size)
-        val playerTwoIndex = Random.nextInt(Deck.deck.size)
-
-        val playerOneCard = Deck.deck[playerOneIndex]
-        val playerTwoCard = Deck.deck[playerTwoIndex]
-
-        Deck.deck.removeAt(playerOneIndex)
-        Deck.deck.removeAt(playerTwoIndex)
-
-        binding.p1ImageView.setImageResource(playerOneCard.imageResourceId)
-        binding.p2ImageView.setImageResource(playerTwoCard.imageResourceId)
-
-
-
-
     }
 }
