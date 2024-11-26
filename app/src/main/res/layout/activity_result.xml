@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:background="@color/cardview_dark_background"
+    android:layout_height="match_parent"
+    tools:context=".ResultActivity">
+
+    <androidx.cardview.widget.CardView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="16dp"
+        android:layout_width="match_parent"
+        android:backgroundTint="@color/Red"
+        android:layout_height="300dp">
+
+        <TextView
+            android:id="@+id/resultText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Player 1 win"
+            android:textSize="48dp"
+            style="@style/CustomButtonStyle">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/playerValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="P1: 30"
+            android:layout_gravity="bottom"
+            android:textSize="48sp"
+            style="@style/CustomButtonStyle">
+
+        </TextView>
+        <TextView
+            android:id="@+id/cpuValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="P2: 30"
+            android:layout_marginTop="227dp"
+            android:layout_gravity="right"
+            android:textSize="48sp"
+            style="@style/CustomButtonStyle">
+
+        </TextView>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/playButton"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:text="@string/play_again"
+        android:layout_gravity="bottom"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/Red"
+        android:textColor="@color/white"
+        style="@style/CustomButtonStyle"
+        app:rippleColor="@color/cardview_dark_background"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

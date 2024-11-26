@@ -3,6 +3,7 @@ package com.example.warcardgame
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -13,6 +14,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.warcardgame.databinding.ActivityGameBinding
 import kotlin.random.Random
+import kotlin.random.nextInt
 
 /**
  * Class where the Game happens
@@ -71,24 +73,25 @@ class GameActivity : AppCompatActivity() {
             }
 
             if (playerOneCard.value == playerTwoCard.value) {
-                warSpin(playerOneCard,playerTwoCard)
+                warSpin(playerOneCard, playerTwoCard)
 
 
-            }else if (playerOneCard.value > playerTwoCard.value) {
+            } else if (playerOneCard.value > playerTwoCard.value) {
                 player.points += 1
                 println("Player wins the round! Player points: ${player.points}")
-            }
-
-            else {
+            } else {
                 cpu.points += 1
                 println("Cpu wins the round! Cpu points: ${cpu.points}")
-                }
+            }
 
             binding.player1TextView.text = player.points.toString()
             binding.player2TextView.text = cpu.points.toString()
 
         } else {
-            //TODO NewActivity ResultActivity
+            val newIntent = Intent(this, ResultActivity::class.java)
+            newIntent.putExtra("p1Value", player.points)
+            newIntent.putExtra("cpuValue", cpu.points)
+            startActivity(newIntent)
         }
     }
 
@@ -106,55 +109,76 @@ class GameActivity : AppCompatActivity() {
         war(playerOneCard,playerTwoCard)
     }
     private fun war(playerOneCard: Card,playerTwoCard: Card) {
-        val playerWarCards = mutableListOf<Card>()
-        val cpuWarCards = mutableListOf<Card>()
+        if (deck.warDeck.size < 8 && player.points > cpu.points) {
+            switchActivity()
 
-        playerWarCards.add(playerOneCard)
-        cpuWarCards.add(playerTwoCard)
-
-        repeat(3) {
-            playerWarCards.add(drawWarCards(deck.warDeck))
-            cpuWarCards.add(drawWarCards(deck.warDeck))
+        }else if (deck.warDeck.size < 8 && player.points < cpu.points) {
+           switchActivity()
         }
 
-        binding.p1c1.setImageResource(playerWarCards[0].imageResourceId)
-        binding.p1c2.setImageResource(playerWarCards[1].imageResourceId)
-        binding.p1c3.setImageResource(playerWarCards[2].imageResourceId)
-        binding.p1c4.setImageResource(playerWarCards[3].imageResourceId)
-
-        binding.p2c1.setImageResource(cpuWarCards[0].imageResourceId)
-        binding.p2c2.setImageResource(cpuWarCards[1].imageResourceId)
-        binding.p2c3.setImageResource(cpuWarCards[2].imageResourceId)
-        binding.p2c4.setImageResource(cpuWarCards[3].imageResourceId)
-
-        val playerValue = playerWarCards.sumOf { it.value }
-        val cpuValue = cpuWarCards.sumOf { it.value }
-
-        println("Player's total card value: ${playerValue}")
-        println("CPU's total card value: $cpuValue")
-
-        binding.warValuep1.text = playerValue.toString()
-        binding.warValuep2.text = cpuValue.toString()
-
-        if (playerValue > cpuValue) {
-            player.points += 1
-        }
-
-        if (playerValue < cpuValue) {
-            cpu.points += 1
-        }
         else {
-            war(playerOneCard,playerTwoCard)
+
+            val playerWarCards = mutableListOf<Card>()
+            val cpuWarCards = mutableListOf<Card>()
+
+            playerWarCards.add(playerOneCard)
+            cpuWarCards.add(playerTwoCard)
+
+            repeat(3) {
+                playerWarCards.add(drawWarCards(deck.warDeck))
+                cpuWarCards.add(drawWarCards(deck.warDeck))
+            }
+
+            binding.p1c1.setImageResource(playerWarCards[0].imageResourceId)
+            binding.p1c2.setImageResource(playerWarCards[1].imageResourceId)
+            binding.p1c3.setImageResource(playerWarCards[2].imageResourceId)
+            binding.p1c4.setImageResource(playerWarCards[3].imageResourceId)
+
+            binding.p2c1.setImageResource(cpuWarCards[0].imageResourceId)
+            binding.p2c2.setImageResource(cpuWarCards[1].imageResourceId)
+            binding.p2c3.setImageResource(cpuWarCards[2].imageResourceId)
+            binding.p2c4.setImageResource(cpuWarCards[3].imageResourceId)
+
+            val playerValue = playerWarCards.sumOf { it.value }
+            val cpuValue = cpuWarCards.sumOf { it.value }
+
+            println("Player's total card value: ${playerValue}")
+            println("CPU's total card value: $cpuValue")
+
+            binding.warValuep1.text = playerValue.toString()
+            binding.warValuep2.text = cpuValue.toString()
+
+            if (playerValue > cpuValue) {
+                player.points += 1
+            }
+
+            if (playerValue < cpuValue) {
+                cpu.points += 1
+            } else {
+                war(playerOneCard, playerTwoCard)
+            }
+            binding.player1TextView.text = player.points.toString()
+            binding.player2TextView.text = cpu.points.toString()
         }
-        binding.player1TextView.text = player.points.toString()
-        binding.player2TextView.text = cpu.points.toString()
 
     }
     private fun drawWarCards (deck: MutableList<Card>) : Card {
+        if (deck.isEmpty()) {
+            val randomValue = Random.nextInt(2..14)
+            println("Deck is empty. Printing Joker")
+            val randomCard = Card("Joker",randomValue,R.drawable.joker)
+            return randomCard
+        }
         val randomIndex = Random.nextInt(deck.size)
         val drawnCard = deck[randomIndex]
         deck.removeAt(randomIndex)
         return drawnCard
+    }
+    private fun switchActivity () {
+        val newIntent = Intent(this, ResultActivity::class.java)
+        newIntent.putExtra("p1Value", player.points)
+        newIntent.putExtra("cpuValue", cpu.points)
+        startActivity(newIntent)
     }
 
 }
