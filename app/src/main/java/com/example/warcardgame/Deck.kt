@@ -5,6 +5,7 @@ class Deck {
     private val suits = listOf("Hearts","Diamonds","Clubs","Spades")
     private val values = 2..14
     var deck: MutableList<Card> = mutableListOf()
+    var warDeck: MutableList<Card> = mutableListOf()
 
 
     init {
@@ -16,6 +17,7 @@ class Deck {
             for(value in values) {
                 val imageResourceId = getImageResourceID(suit,value)
                 deck.add(Card(suit,value,imageResourceId))
+                warDeck.add(Card(suit,value,imageResourceId))
 
             }
         }

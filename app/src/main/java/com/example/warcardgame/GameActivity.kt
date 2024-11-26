@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -70,7 +71,8 @@ class GameActivity : AppCompatActivity() {
             }
 
             if (playerOneCard.value == playerTwoCard.value) {
-                warFunction(playerOneCard,playerTwoCard)
+                warSpin(playerOneCard,playerTwoCard)
+
 
             }else if (playerOneCard.value > playerTwoCard.value) {
                 player.points += 1
@@ -85,10 +87,12 @@ class GameActivity : AppCompatActivity() {
             binding.player1TextView.text = player.points.toString()
             binding.player2TextView.text = cpu.points.toString()
 
+        } else {
+            //TODO NewActivity ResultActivity
         }
     }
 
-    private fun warFunction (playerOneCard : Card, playerTwoCard : Card) {
+    private fun warSpin (playerOneCard : Card, playerTwoCard : Card) {
         binding.warTextView.visibility = View.VISIBLE
 
         val anim = ObjectAnimator.ofFloat(binding.playerOneImgView, "rotationY", 0f, 360f)
@@ -98,5 +102,59 @@ class GameActivity : AppCompatActivity() {
         val anim2 = ObjectAnimator.ofFloat(binding.playerTwoImgView, "rotationY", 0f, 360f)
         anim2.duration = 500
         anim2.start()
+
+        war(playerOneCard,playerTwoCard)
     }
+    private fun war(playerOneCard: Card,playerTwoCard: Card) {
+        val playerWarCards = mutableListOf<Card>()
+        val cpuWarCards = mutableListOf<Card>()
+
+        playerWarCards.add(playerOneCard)
+        cpuWarCards.add(playerTwoCard)
+
+        repeat(3) {
+            playerWarCards.add(drawWarCards(deck.warDeck))
+            cpuWarCards.add(drawWarCards(deck.warDeck))
+        }
+
+        binding.p1c1.setImageResource(playerWarCards[0].imageResourceId)
+        binding.p1c2.setImageResource(playerWarCards[1].imageResourceId)
+        binding.p1c3.setImageResource(playerWarCards[2].imageResourceId)
+        binding.p1c4.setImageResource(playerWarCards[3].imageResourceId)
+
+        binding.p2c1.setImageResource(cpuWarCards[0].imageResourceId)
+        binding.p2c2.setImageResource(cpuWarCards[1].imageResourceId)
+        binding.p2c3.setImageResource(cpuWarCards[2].imageResourceId)
+        binding.p2c4.setImageResource(cpuWarCards[3].imageResourceId)
+
+        val playerValue = playerWarCards.sumOf { it.value }
+        val cpuValue = cpuWarCards.sumOf { it.value }
+
+        println("Player's total card value: ${playerValue}")
+        println("CPU's total card value: $cpuValue")
+
+        binding.warValuep1.text = playerValue.toString()
+        binding.warValuep2.text = cpuValue.toString()
+
+        if (playerValue > cpuValue) {
+            player.points += 1
+        }
+
+        if (playerValue < cpuValue) {
+            cpu.points += 1
+        }
+        else {
+            war(playerOneCard,playerTwoCard)
+        }
+        binding.player1TextView.text = player.points.toString()
+        binding.player2TextView.text = cpu.points.toString()
+
+    }
+    private fun drawWarCards (deck: MutableList<Card>) : Card {
+        val randomIndex = Random.nextInt(deck.size)
+        val drawnCard = deck[randomIndex]
+        deck.removeAt(randomIndex)
+        return drawnCard
+    }
+
 }

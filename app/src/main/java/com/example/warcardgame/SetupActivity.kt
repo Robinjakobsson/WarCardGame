@@ -11,8 +11,6 @@ import com.example.warcardgame.databinding.ActivitySetupBinding
 
 /*TODO
         SetupActivity : Welcome text
-        GameActivity :  Previous Round highlights
-        WarActivity? WarFragment? kom på vad som händer om man får lika.
         ResultActivity : Presentera resultat
         Klämma in sharedPrefs? gson?
 

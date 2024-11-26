@@ -20,4 +20,14 @@
         app:rippleColor="@color/cardview_dark_background"
         app:layout_constraintBottom_toBottomOf="parent" />
 
+    <TextView
+        style="@style/CustomButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/war"
+        android:textSize="40sp"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </TextView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -73,6 +73,7 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:id="@+id/p1c1"
                 android:layout_weight="1"
                 android:layout_width="50dp"
                 android:layout_height="0dp"
@@ -80,6 +81,7 @@
                 android:layout_marginBottom="5dp"/>
 
             <ImageView
+                android:id="@+id/p1c2"
                 android:layout_weight="1"
                 android:layout_width="50dp"
                 android:layout_height="0dp"
@@ -87,6 +89,7 @@
                 android:layout_marginBottom="5dp"/>
 
             <ImageView
+                android:id="@+id/p1c3"
                 android:layout_weight="1"
                 android:layout_width="50dp"
                 android:layout_height="0dp"
@@ -94,6 +97,7 @@
                 android:layout_marginBottom="5dp"/>
 
             <ImageView
+                android:id="@+id/p1c4"
                 android:layout_weight="1"
                 android:layout_width="50dp"
                 android:layout_height="0dp"
@@ -108,6 +112,7 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:id="@+id/p2c1"
                 android:layout_weight="1"
                 android:layout_width="50dp"
                 android:layout_height="0dp"
@@ -115,6 +120,7 @@
                 android:layout_marginBottom="5dp"/>
 
             <ImageView
+                android:id="@+id/p2c2"
                 android:layout_weight="1"
                 android:layout_width="50dp"
                 android:layout_height="0dp"
@@ -122,6 +128,7 @@
                 android:layout_marginBottom="5dp"/>
 
             <ImageView
+                android:id="@+id/p2c3"
                 android:layout_weight="1"
                 android:layout_width="50dp"
                 android:layout_height="0dp"
@@ -129,6 +136,7 @@
                 android:layout_marginBottom="5dp"/>
 
             <ImageView
+                android:id="@+id/p2c4"
                 android:layout_weight="1"
                 android:layout_width="50dp"
                 android:layout_height="0dp"
@@ -137,16 +145,19 @@
 
 
         <TextView
+            android:id="@+id/warValuep1"
+            style="@style/CustomButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="P1:"
-            style="@style/CustomButtonStyle"
-            android:textSize="30sp"
+            android:layout_gravity="bottom"
             android:layout_marginLeft="45dp"
-            android:layout_gravity="bottom">
+            android:textSize="30sp"
+            tools:text="P1:">
+
         </TextView>
 
         <TextView
+            android:id="@+id/warValuep2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="P1:"
@@ -165,7 +176,7 @@
             android:textColor="@android:color/white"
             android:gravity="center"
             android:textStyle="bold"
-            android:visibility="">
+            android:visibility="gone">
 
         </TextView>
 
