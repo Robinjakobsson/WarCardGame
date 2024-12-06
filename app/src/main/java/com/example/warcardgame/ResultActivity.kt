@@ -26,8 +26,11 @@ class ResultActivity : AppCompatActivity() {
 
         if (playerScore > cpuscore) {
             binding.resultText.text = "Player has won with $playerScore points!"
-        }else {
+        }else if (playerScore < cpuscore) {
             binding.resultText.text = "Cpu has won with $cpuscore points!"
+        }
+        else {
+            binding.resultText.text = "Tie!"
         }
 
         binding.playerValue.text = playerScore.toString()

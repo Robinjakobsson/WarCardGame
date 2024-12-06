@@ -9,12 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.warcardgame.databinding.ActivitySetupBinding
 
 
-/*TODO
-        SetupActivity : Welcome text
-        ResultActivity : Presentera resultat
-        Klämma in sharedPrefs? gson?
 
- */
 /**
  * Method to Welcome the user
  */
